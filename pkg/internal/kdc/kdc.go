@@ -1,4 +1,4 @@
-package kdc
+package main
 
 import (
 	"context"
@@ -10,6 +10,10 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
+	"github.com/spf13/viper"
+	"go.uber.org/zap"
+
+	log "github.com/malukimuthusi/authentication/pkg/internal/logger"
 )
 
 func main() {
@@ -46,7 +50,7 @@ func main() {
 	// Run our server in a goroutine so that it doesn't block.
 	go func() {
 
-		logger.Info(fmt.Sprintf("Starting server %s\n", srv.Addr))
+		log.Info(fmt.Sprintf("Starting server %s\n", srv.Addr))
 
 		if err := srv.ListenAndServe(); err != nil {
 			log.Error("failed to start server", zap.Error(err))
